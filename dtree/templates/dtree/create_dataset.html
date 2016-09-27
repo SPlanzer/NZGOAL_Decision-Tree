@@ -1,0 +1,47 @@
+{% extends 'dtree/base.html' %}
+{% block title %}Add a New Album{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Add New Data Set</h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'dtree/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>NZGOAL Decision Tree</h3>
+                    <p>After Submitting a new data set you will be required to answer a series of question to ensure the dataset is suitable for publishing via the LINZ Data Service (LDS)</p>
+                    <h3>Linking the decisions to the LDS dataset</h3>
+                    <p>Decision making can be return to for a dataset by navigating to the dataset tab in the above navigation bar. </p><br>
+                    <p>Once the series of question has been completed and it has been confirm the dataset meets the NZGOAL frame work and the dataset
+                    is fit for publishing via the LDS the data my be published. Once the datahas been published the LDS id must be added to the dataset as to 
+                    like the decsions made here with the LDS dataset </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

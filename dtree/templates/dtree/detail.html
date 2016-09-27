@@ -1,0 +1,35 @@
+{% extends 'dtree/base.html' %}
+
+{% block body %}
+
+<div align="center">
+	<h1>{{ dataset }}</h1><br>
+	<ul>
+		{% for a in answers %}
+				<div class="panel panel-default">
+					<h4> {{ a.question.qid }}:  {{a.question.question }} </h4><br>
+					{% if a.answer %}				
+						<p> {{ a.answer }} </p><br>
+					{% endif %}			
+				</div><br>
+		{% endfor %}
+		{% for a in answers %}
+			{% if forloop.last %} 
+				{% if a.question.isquestion %}
+					 <form action={% url 'dtree:yes' %} method="post">
+					 {% csrf_token %}
+					 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="yes"></input>
+					 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="no"></input>
+					</form>
+				{% else %}
+					<form action={% url 'dtree:yes' %} method="post">
+					 {% csrf_token %}
+					 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="ok"></input>
+					</form>
+				{% endif %}
+			{% endif %}
+		{% endfor %}	
+	</ul><br>
+</div>
+
+{% endblock %}

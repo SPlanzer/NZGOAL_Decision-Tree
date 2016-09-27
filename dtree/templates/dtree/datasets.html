@@ -1,0 +1,19 @@
+{% extends 'dtree/base.html' %}
+
+{% block body %}
+<div class="col-sm-12 col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">	
+			<ul>
+			<h1>Evaluated Data Sets </h1>
+			
+				{% for dataSet in allDataSets %} 
+				<li><a href="/dtree/{{ dataSet.id }}/">{{ dataSet.dataSetName }} </a> *missing lds id</li>
+				{% endfor %}
+				
+			</ul>
+		</div>
+	</div>
+</div>
+	
+{% endblock %}
