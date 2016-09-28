@@ -47,6 +47,14 @@ def getDataSet(id):
     
     return DataSet.objects.get(pk=id)
 
+def setTreeComplete(dataSet):
+    """
+    Indicate that the decision process has ended
+    """
+    print 'COMPLETE'
+    dataSet.treeComplete = True
+    dataSet.save()
+
 def nextQuestion(dataSet, ca = None, decision = None):
     """
     Create Answer DB entry with null answer.
@@ -59,10 +67,14 @@ def nextQuestion(dataSet, ca = None, decision = None):
         nextQ = ca.question.n
     else:
         nextQ = ca.question.y
+    print nextQ
+    print '^^^^'
     q = Question.objects.get(qid__exact=nextQ)
     a = Answer(dataSet=dataSet, question=q)
     a.save()
-   
+    if nextQ in ('04', '08','10', '17'): #these q's are the end of the line
+        setTreeComplete(dataSet)
+ 
 def createDataSet(request):
     """
     Get form input (new data set name), create 

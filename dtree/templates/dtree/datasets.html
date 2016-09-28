@@ -1,18 +1,34 @@
 {% extends 'dtree/base.html' %}
 
 {% block body %}
-<div class="col-sm-12 col-md-12">
-    <div class="panel panel-default">
-        <div class="panel-body">	
-			<ul>
-			<h1>Evaluated Data Sets </h1>
-			
-				{% for dataSet in allDataSets %} 
-				<li><a href="/dtree/{{ dataSet.id }}/">{{ dataSet.dataSetName }} </a> *missing lds id</li>
-				{% endfor %}
-				
-			</ul>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+					<ul>
+						<h1>Evaluated Data Sets </h1>
+							{% for dataSet in allDataSets %} 
+								<li><a href="/dtree/{{ dataSet.id }}/">{{ dataSet.dataSetName }} </a></li>
+							{% endfor %}			
+					</ul>
+				</div>
+			</div>
 		</div>
+        <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>NZGOAL Decision Tree</h3>
+                    <p>Once a dataset has been submitted it may be revisited via this page. This allows the 
+                    review of what consideration were taken when publishing a dataset</p><br>
+                    <p>Dataset NZGOAL decisions can be modified up until the point the decision tree reaches it end
+                    at which stage the decisions are considered complete.</p>
+                    <h3>Add the LDS id</h3>
+                    <p>Once a dataset has been published via the LDS, the LDS dataset id must be
+                    added here to the dataset to support auditing. how to do this? tbc   </p>
+                </div>
+            </div>
+        </div>			
 	</div>
 </div>
 	

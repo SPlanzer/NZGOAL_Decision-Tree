@@ -13,22 +13,26 @@
 					{% endif %}			
 				</div><br>
 		{% endfor %}
-		{% for a in answers %}
-			{% if forloop.last %} 
-				{% if a.question.isquestion %}
-					 <form action={% url 'dtree:yes' %} method="post">
-					 {% csrf_token %}
-					 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="yes"></input>
-					 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="no"></input>
-					</form>
-				{% else %}
-					<form action={% url 'dtree:yes' %} method="post">
-					 {% csrf_token %}
-					 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="ok"></input>
-					</form>
+		{% if dataset.treeComplete  %}
+			<h3 style="color:Red;">Tree Complete</h3><br>	
+		{% else %}
+			{% for a in answers %}
+				{% if forloop.last %} <!--  seems this must be quite inefficient -->
+					{% if a.question.isquestion %}
+						 <form action={% url 'dtree:yes' %} method="post">
+						 {% csrf_token %}
+						 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="yes"></input>
+						 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="no"></input>
+						</form>
+					{% else %}
+						<form action={% url 'dtree:yes' %} method="post">
+						 {% csrf_token %}
+						 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="ok"></input>
+						</form>
+					{% endif %}
 				{% endif %}
-			{% endif %}
-		{% endfor %}	
+			{% endfor %}
+		{% endif %}
 	</ul><br>
 </div>
 
