@@ -1,35 +1,70 @@
 {% extends 'dtree/base.html' %}
 
 {% block body %}
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 col-md-8">
+        <div class="col-sm-9 col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-					<ul>
-						<h1>Evaluated Data Sets </h1>
-							{% for dataSet in allDataSets %} 
-								<li><a href="/dtree/{{ dataSet.id }}/">{{ dataSet.dataSetName }} </a></li>
-							{% endfor %}			
-					</ul>
-				</div>
-			</div>
-		</div>
-        <div class="col-sm-12 col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3>NZGOAL Decision Tree</h3>
-                    <p>Once a dataset has been submitted it may be revisited via this page. This allows the 
-                    review of what consideration were taken when publishing a dataset</p><br>
-                    <p>Dataset NZGOAL decisions can be modified up until the point the decision tree reaches it end
-                    at which stage the decisions are considered complete.</p>
-                    <h3>Add the LDS id</h3>
-                    <p>Once a dataset has been published via the LDS, the LDS dataset id must be
-                    added here to the dataset to support auditing. how to do this? tbc   </p>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                                           
+                            <th>Dataset</th>
+                            <th>Complete</th>
+                            <th>LDS id</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for dataSet in allDataSets %} 
+                            <tr>
+                                <td><a href="/dtree/{{ dataSet.id }}/">{{ dataSet.dataSetName }} </a></td>
+                                <td>
+	                                {% if dataSet.treeComplete %}
+	                                	<span class="glyphicon glyphicon-ok"></span>
+	                                {% else %}
+	                                	<span class="glyphicon glyphicon-remove"></span>
+	                                {% endif %}
+                                </td>
+                                <td>
+                                	{% if dataSet.ldsId %}
+                                		<a href="{% url 'dtree:addldsid' dataSet.id %}" style="background-color:#FFFFFF;color:#000000;text-decoration:none">{{ dataSet.ldsId }}</a>
+                                	{% else %}
+                                    	<a href="{% url 'dtree:addldsid' dataSet.id %}" class="btn btn-inverse btn-xs">
+                                            <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                                    	</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                	{% if dataSet.treeComplete %}
+                                		<button type="submit"  title="This Descision Tree Is complete and can't be removed" disabled class="btn btn-inverse btn-xs">
+                                            <span class="glyphicon glyphicon-trash"></span>&nbsp; Delete
+                                        </button>
+                                    {% else %}
+                                    	<a href="{% url 'dtree:remove' dataSet.id %}" class="btn btn-inverse btn-xs">
+                                            <span class="glyphicon glyphicon-trash"></span>&nbsp; Delete
+                                    	</a>
+                                   {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>			
-	</div>
+        </div>
+		<div class="col-sm-12 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Adding the LDS id</h3>
+                    <p>Once a dataset has been published via the LDS, the LDS dataset id must be add to support auditing </p>
+                </div>
+            </div>
+       </div>
+    </div>
 </div>
-	
+
+
 {% endblock %}

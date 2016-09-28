@@ -4,36 +4,43 @@
 
 <div align="center">
 	<h1>{{ dataset }}</h1><br>
-	<ul>
-		{% for a in answers %}
-				<div class="panel panel-default">
-					<h4> {{ a.question.qid }}:  {{a.question.question }} </h4><br>
-					{% if a.answer %}				
-						<p> {{ a.answer }} </p><br>
-					{% endif %}			
-				</div><br>
-		{% endfor %}
-		{% if dataset.treeComplete  %}
-			<h3 style="color:Red;">Tree Complete</h3><br>	
-		{% else %}
+		<div class="row">
+		<div class='col-lg-6 col-lg-push-3'>
 			{% for a in answers %}
-				{% if forloop.last %} <!--  seems this must be quite inefficient -->
-					{% if a.question.isquestion %}
-						 <form action={% url 'dtree:yes' %} method="post">
-						 {% csrf_token %}
-						 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="yes"></input>
-						 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="no"></input>
-						</form>
-					{% else %}
-						<form action={% url 'dtree:yes' %} method="post">
-						 {% csrf_token %}
-						 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="ok"></input>
-						</form>
-					{% endif %}
-				{% endif %}
+					<div class="panel panel-default">
+						<h4><strong>{{ a.question.qid }}:</strong>  {{a.question.question }} </h4><br>
+						{% if a.answer %}				
+							<p><i>{{ a.answer }}</i></p><br>
+						{% endif %}			
+					</div>
 			{% endfor %}
-		{% endif %}
-	</ul><br>
+			{% if dataset.treeComplete  %}
+				<h3 style="color:Red;">Tree Complete</h3><br>	
+				<a href="{% url 'dtree:datasets' %}" class="btn btn-inverse btn-md">
+	                 <span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Datasets<br>
+	            </a>
+			{% else %}
+				{% for a in answers %}
+					{% if forloop.last %} <!--  seems this must be quite inefficient -->
+						{% if a.question.isquestion %}
+							 <form action={% url 'dtree:yes' %} method="post">
+							 {% csrf_token %}
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="yes"></input>
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="no"></input>
+							</form>
+						{% else %}
+							<form action={% url 'dtree:yes' %} method="post">
+							 {% csrf_token %}
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="ok"></input>
+							</form>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
 </div>
 
+<div id="bottom"></div>
+<br>
 {% endblock %}

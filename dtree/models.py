@@ -14,8 +14,8 @@ class DataSet(models.Model):
 class Question(models.Model):
     qid = models.CharField(max_length=2)
     question = models.CharField(max_length=1500)
-    y = models.CharField(max_length=2, null=True, blank=True) # remove bland & null
-    n = models.CharField(max_length=2, null=True, blank=True)
+    y = models.CharField(max_length=2) 
+    n = models.CharField(max_length=2)
     isquestion = models.BooleanField(default=True) 
         
     def __str__(self):

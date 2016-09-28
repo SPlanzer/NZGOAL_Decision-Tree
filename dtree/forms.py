@@ -9,3 +9,9 @@ class DataSetForm(forms.ModelForm):
     class Meta:
         model = DataSet
         fields = ['dataSetName']
+        
+class AddLdsIdForm(forms.ModelForm):
+
+    class Meta:
+        model = DataSet
+        fields = ['ldsId']

@@ -1,6 +1,4 @@
 {% extends 'dtree/base.html' %}
-{% block title %}Add a New Album{% endblock %}
-{% block albums_active %}active{% endblock %}
 
 {% block body %}
 <div class="container-fluid">
@@ -14,12 +12,12 @@
                     {% if error_message %}
                         <p><strong>{{ error_message }}</strong></p>
                     {% endif %}
-                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="" method="post" >
                         {% csrf_token %}
                         {% include 'dtree/form_template.html' %}
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <button type="submit" class="btn btn-inverse btn-sm">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -31,12 +29,14 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h3>NZGOAL Decision Tree</h3>
-                    <p>After Submitting a new data set name you will be required to answer a series of question to ensure the dataset is suitable for publishing via the LINZ Data Service (LDS)</p><br>
+                    <p>After Submitting a new dataset name you will be required to answer a series of question to ensure the dataset is suitable for publishing via
+                        the LINZ Data Service (LDS). These Wuestion are based on the NZGOAL Framework Decision Tree
+                        <a href="https://www.ict.govt.nz/guidance-and-resources/open-government/new-zealand-government-open-access-and-licensing-nzgoal-framework/decision-tree/" target="_blank">NZGOAL Framework Decision Tree</a></p><br>
+                    <p>Once the series of question has been completed and it has been confirm the dataset meets the NZGOAL framework for publishing, </p>
+                    
                     <h3>Add the LDS id</h3>
-                    <p>The decision tree for a data set can be returned to at anytime by navigating to the "Data Sets" tab in the above navigation bar. </p><br>
-                    <p>Once the series of question has been completed and it has been confirm the dataset meets the NZGOAL framework for publishing, 
-                    the dataset my be published as per the outcome of the decision tree. If the data is published via the LDS, the LDS id must be then 
-                    added against the dataset here to support auditing.  this can be achieved by ... tbc </p>
+                    <p>The dataset my be published as per the outcome of the decision tree. If the data is published via the LDS, 
+                    the LDS dataset id must be add to support auditing. This can be done on the DataSets page</p>
                 </div>
             </div>
         </div>
