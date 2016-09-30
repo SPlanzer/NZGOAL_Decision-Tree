@@ -2,9 +2,7 @@
 
 {% block body %}
 <div class="container-fluid">
-
     <div class="row">
-
         <div class="col-sm-12 col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -16,7 +14,7 @@
                         {% csrf_token %}
                         {% include 'dtree/form_template.html' %}
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-8">
+                            <div class="col-sm-offset-3 col-sm-8">
                                 <button type="submit" class="btn btn-inverse btn-sm">Submit</button>
                             </div>
                         </div>
@@ -24,7 +22,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-12 col-md-4">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -33,15 +30,12 @@
                         the LINZ Data Service (LDS). These Wuestion are based on the NZGOAL Framework Decision Tree
                         <a href="https://www.ict.govt.nz/guidance-and-resources/open-government/new-zealand-government-open-access-and-licensing-nzgoal-framework/decision-tree/" target="_blank">NZGOAL Framework Decision Tree</a></p><br>
                     <p>Once the series of question has been completed and it has been confirm the dataset meets the NZGOAL framework for publishing, </p>
-                    
                     <h3>Add the LDS id</h3>
                     <p>The dataset my be published as per the outcome of the decision tree. If the data is published via the LDS, 
                     the LDS dataset id must be add to support auditing. This can be done on the DataSets page</p>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 {% endblock %}

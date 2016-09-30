@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^(?P<dataSet_id>[0-9]+)/addldsid/$', views.addLdsId, name = 'addldsid'),
     url(r'^(?P<dataSet_id>[0-9]+)/remove/$', views.removeDataSet, name = 'remove'),
     url(r'^create_dataset/$', views.createDataSet, name='createdataset'),
+    url(r'^audit/$', views.audit, name='audit'),
     url(r'yes/$', views.uDecision, name='yes'),
     url(r'no/$', views.uDecision, name='no'),
     url(r'ok/$', views.uDecision, name='ok'),

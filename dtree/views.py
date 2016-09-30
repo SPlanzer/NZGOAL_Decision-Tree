@@ -1,11 +1,13 @@
 from django.http import Http404
 from django.shortcuts import render
-from django.template import loader
 from .models import Question, Answer, DataSet
-from django.views import generic
-from django.views.generic.edit import CreateView
 from django import forms
-from .forms import DataSetForm, AddLdsIdForm
+
+import threading
+
+from .forms import DataSetForm, AddLdsIdForm, AuditForm
+from .audit import auditLds
+
 
 # --------------------------
 # Views
@@ -84,7 +86,7 @@ def setTreeComplete(dataSet):
     """
     Indicate tdetail(request, dataSet_id):hat the decision process has ended
     """
-    print 'COMPLETE'
+
     dataSet.treeComplete = True
     dataSet.save()
 
@@ -101,12 +103,9 @@ def nextQuestion(dataSet, ca = None, decision = None):
     else:
         nextQ = ca.question.y
     q = Question.objects.get(qid__exact=nextQ)
-    print q
     a = Answer(dataSet=dataSet, question=q)
-    print nextQ
     a.save()
     if nextQ in ('04', '08','10', '17', '22', '24', '30'): #these q's are the end of the line
-        print 'complete'
         setTreeComplete(dataSet)
  
 
@@ -150,14 +149,23 @@ def uDecision(request):
 
 def removeDataSet(request, dataSet_id):
     dataSet = getDataSet(dataSet_id)
-    print dataSet
     dataSet.delete()
     return datasets(request)
-    
 
-
-
-
+def audit(request):
+    if request.method == 'POST':
+        form = AuditForm(request.POST)
+        if form.is_valid():
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
+            email = form.cleaned_data['email']
+            lds_ids = DataSet.objects.filter(treeComplete=True).values_list('ldsId', flat=True)
+            t = threading.Thread(target=auditLds,args=(lds_ids, date_from, date_to, email))
+            t.start()
+            return render(request, 'dtree/audit_standby.html', {'email': email})
+    else:
+        form = AuditForm()
+    return render(request, 'dtree/audit.html', {'form': form})
 
 
 
