@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Question, Answer, DataSet
 from django import forms
 
@@ -17,9 +17,9 @@ def datasets(request):
     allDataSets = DataSet.objects.order_by('dataSetName').all()
     return render(request, 'dtree/datasets.html', {'allDataSets':allDataSets}) 
 
-def index(request):
+def about(request):
     allDataSets = DataSet.objects.all()
-    return render(request, 'dtree/index.html', {'allDataSets':allDataSets}) 
+    return render(request, 'dtree/about.html', {'allDataSets':allDataSets}) 
 
 def detail(request, dataSet_id):
     # add 404 handling
@@ -79,8 +79,7 @@ def getDataSet(id):
     Returns a Dataset Object as related to a 
     dataset pk 
     """
-    
-    return DataSet.objects.get(pk=id)
+    return get_object_or_404(DataSet, pk=id)
 
 def setTreeComplete(dataSet):
     """
@@ -125,25 +124,34 @@ def setAnswer(ca, ans):
     ca.answer = ans
     ca.save()
 
+def rollBackDecision(dataSet_id):
+    a = currentAnswer(dataSet_id)
+    a.delete()
+    
 def uDecision(request): 
     """
     Set the user decision (yes, no , ok)
     against an answer/question    
     """
-    
     r = request.POST.values()
-    if 'yes' in r:
-        decision = 'yes'
-    elif 'no'in r:
-        decision = 'no'
-    elif 'ok' in r:
-        decision = 'ok'
+    if 'Yes' in r:
+        decision = 'Yes'
+    elif 'No'in r:
+        decision = 'No'
+    elif 'Ok' in r:
+        decision = 'Ok'
+    elif '^' in r:
+        decision = '^'
     #error handelng in case the above fails
     datasetid = request.POST.keys()[request.POST.values().index(decision)]
     dataSet = getDataSet(datasetid)
     ca = currentAnswer(datasetid)
-    setAnswer(ca, decision)
-    nextQuestion(dataSet, ca, decision)
+    if decision != '^':
+        setAnswer(ca, decision)
+        nextQuestion(dataSet, ca, decision)
+    #user request a roll back i.e last question
+    else:
+        rollBackDecision(datasetid)
     answers = getAnswers(dataSet.pk)
     return render(request, 'dtree/detail.html', {'answers': answers, 'dataset':dataSet})
 

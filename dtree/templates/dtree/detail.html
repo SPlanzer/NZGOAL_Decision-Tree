@@ -2,10 +2,19 @@
 
 {% block body %}
 
+{% load static %}
+{% block extrahead %}
+	 <script src={% static "dtree/js/toBottom.js" %} type="text/javascript"></script>
+
+<script>
+	toBottom.toBottom();
+</script>
+{% endblock %}
+
 <div align="center">
 	<h1>{{ dataset }}</h1><br>
 		<div class="row">
-		<div class='col-lg-6 col-lg-push-3'>
+		<div class='col-md-6 col-lg-push-3'>
 			{% for a in answers %}
 					<div class="panel panel-default">
 						<h4><strong>{{ a.question.qid }}:</strong>  {{a.question.question }} </h4><br>
@@ -25,13 +34,17 @@
 						{% if a.question.isquestion %}
 							 <form action={% url 'dtree:yes' %} method="post">
 							 {% csrf_token %}
-							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="yes"></input>
-							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="no"></input>
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="Yes"></input>
+							 	{% if a.question.qid != '01' %}
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="^"></input>
+							 	{% endif %}
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="No"></input>
 							</form>
 						{% else %}
 							<form action={% url 'dtree:yes' %} method="post">
 							 {% csrf_token %}
-							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="ok"></input>
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="Ok"></input>
+							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="^"></input>
 							</form>
 						{% endif %}
 					{% endif %}

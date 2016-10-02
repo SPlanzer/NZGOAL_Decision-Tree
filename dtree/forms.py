@@ -20,9 +20,9 @@ class AddLdsIdForm(forms.ModelForm):
         labels = {'ldsId': ('LDS id'),}
 
 class AuditForm(forms.Form):
-    date_from = forms.DateField(label='date from', input_formats=['%d/%m/%y'])
-    date_to = forms.DateField(label='date to', input_formats=['%d/%m/%y'])
-    email = forms.CharField(label='email', max_length=100)
+    date_from = forms.DateField(label='Date from (dd/mm/yy)', input_formats=['%d/%m/%y'])
+    date_to = forms.DateField(label='Date to (dd/mm/yy)', input_formats=['%d/%m/%y'])
+    email = forms.CharField(label='Email', max_length=100)
 
 
 
