@@ -4,10 +4,10 @@
      image: imiell/sqlite
    web:
      build: .
-     #command: python manage.py runserver 127.0.0.1:8000
+     command: python manage.py runserver 0.0.0.0:8000
      volumes:
        - /webapp:/code
      ports:
-       - "8000:8000"
+       - "8000:8888"
      depends_on:
        - db
