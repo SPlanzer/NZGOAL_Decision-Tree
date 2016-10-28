@@ -39,7 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'doj',
 ]
+
+# java dependancies 
+#DOJ_BUILDWAR_JAVA_LIBS = [
+#    os.path.join(BASE_DIR, 'sqlite-jdbc-3.7.2.jar'),
+  # More .jars...
+#]
+
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,8 +87,9 @@ WSGI_APPLICATION = 'NZGoalDtree.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'doj.db.backends.sqlite', #for deployment
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

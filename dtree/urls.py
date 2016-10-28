@@ -6,7 +6,7 @@ from . import views
 app_name = 'dtree'
 
 urlpatterns = [
-    url(r'^about$', views.about, name = 'about'),
+    url(r'^about/$', views.about, name = 'about'),
     url(r'datasets/$|^$', views.datasets, name = 'datasets'),
     url(r'^(?P<dataSet_id>[0-9]+)/$', views.detail, name = 'detail'),
     url(r'^(?P<dataSet_id>[0-9]+)/addldsid/$', views.addLdsId, name = 'addldsid'),

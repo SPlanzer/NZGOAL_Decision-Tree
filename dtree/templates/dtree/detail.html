@@ -25,14 +25,14 @@
 			{% endfor %}
 			{% if dataset.treeComplete  %}
 				<h3 style="color:Red;">Tree Complete</h3><br>	
-				<a href="{% url 'dtree:datasets' %}" class="btn btn-inverse btn-md">
+				<a href="{% url 'datasets' %}" class="btn btn-inverse btn-md">
 	                 <span class="glyphicon glyphicon-chevron-left"></span>&nbsp; Datasets<br>
 	            </a>
 			{% else %}
 				{% for a in answers %}
 					{% if forloop.last %} <!--  seems this must be quite inefficient -->
 						{% if a.question.isquestion %}
-							 <form action={% url 'dtree:yes' %} method="post">
+							 <form action={% url 'yes' %} method="post">
 							 {% csrf_token %}
 							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="Yes"></input>
 							 	{% if a.question.qid != '01' %}
@@ -41,7 +41,7 @@
 							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="No"></input>
 							</form>
 						{% else %}
-							<form action={% url 'dtree:yes' %} method="post">
+							<form action={% url 'yes' %} method="post">
 							 {% csrf_token %}
 							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="Ok"></input>
 							 	<input name= {{ dataset.id }} class="btn btn-inverse btn-md" type="submit" value="^"></input>

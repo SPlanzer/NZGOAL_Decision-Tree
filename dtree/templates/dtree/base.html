@@ -23,35 +23,34 @@
 		<!-- Logo -->
 		<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
-			<!-- Strange, but this is the number of lines on the drop down icon -->
 			<span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
 		</button>
-			<a class="navbar-brand" href="{% url 'dtree:about' %}">NZGOAL-Dtree</a>
+			<a class="navbar-brand" href="{% url 'about' %}">NZGOAL-Dtree</a>
 		</div>
 	
 	<!-- Items -->
     <div class="collapse navbar-collapse" id="topNavBar">
     	<ul class="nav navbar-nav">
                 <li class="">
-                	<a href="{% url 'dtree:datasets' %}">
+                	<a href="{% url 'datasets' %}">
                 		<span class="glyphicon glyphicon-hdd" aria-hidden="true"></span>&nbsp; Datasets
                 	</a>
                 </li>
 		    	<li class="">
-		            <a href="{% url 'dtree:createdataset' %}">
+		            <a href="{% url 'createdataset' %}">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; New Dataset
 		            </a>
 		        </li>
            </ul>
 		   <ul class="nav navbar-nav navbar-right">
 		        <li class="">
-		            <a href="{% url 'dtree:audit' %}">
+		            <a href="{% url 'audit' %}">
 		                <span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>&nbsp; Audit
 		            </a>    
                 <li class="">
-                	<a href="{% url 'dtree:about' %}">
+                	<a href="{% url 'about' %}">
                 		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp; About
                 	</a>
                 </li>      

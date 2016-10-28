@@ -1,5 +1,4 @@
 import xml.etree.ElementTree as etree
-import dateutil.parser
 from datetime import datetime
 from urllib2 import Request, urlopen, URLError
 from smtplib import SMTP                  #standard SMTP protocol (port 25, no encryption)
@@ -25,7 +24,8 @@ def auditLds(dtree_ldsids ,date_from, date_to, email):
             tree = etree.fromstring(data)
             entries = tree.findall(feed+'entry') 
             for e in entries:
-                data_set_date = dateutil.parser.parse(e.find(feed+'published').text).date()
+                data_set_date = e.find(feed+'published').text.rsplit('T')[0]
+                data_set_date = datetime.strptime(data_set_date, "%Y-%m-%d").date()
                 if data_set_date >= date_from and data_set_date <= date_to:
                     id = e.find(feed+'id').text
                     ldsid = id[id.rfind(':')+1:] #<id>tag:data.linz.govt.nz,2016-09:layers:3452</id>
