@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'doj',
+    'doj', #for jython deployment    
 ]
 
 # java dependancies 
@@ -87,9 +87,19 @@ WSGI_APPLICATION = 'NZGoalDtree.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'doj.db.backends.sqlite', #for deployment
-        #'ENGINE': 'django.db.backends.sqlite3',
+        # SQLITE
+        #'ENGINE': 'doj.db.backends.sqlite', #for jython deployment      
+        #'ENGINE': 'django.db.backends.sqlite3',# for development
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        
+        #POSTGRES
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # for development
+        #'ENGINE': 'doj.db.backends.postgresql', #for jython deployment
+        'NAME': 'nzgoal_dtree',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'devassgeo01',
+        'PORT': '5432',
     }
 }
 
