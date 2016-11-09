@@ -10,6 +10,7 @@ sys.path.append('NZGoalDtree')
 import NZGoalDtree.secrets as secret
 
 def auditLds(dtree_ldsids ,date_from, date_to, email):
+    dtree_ldsids= [item for sublist in [x.split(',') for x in dtree_ldsids] for item in sublist]
     feed = '{http://www.w3.org/2005/Atom}'
     status = 200
     page = 1
@@ -104,4 +105,3 @@ def report(date_from, date_to, missing_ids, registered_ids):
     
     For more information please visit https://www.wikipedia.org/
     '''.format(time, datasetCount, date_from, date_to,results)
-

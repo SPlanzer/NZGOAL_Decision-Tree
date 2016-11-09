@@ -39,15 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'doj', #for jython deployment    
-]
-
-# java dependancies 
-#DOJ_BUILDWAR_JAVA_LIBS = [
-#    os.path.join(BASE_DIR, 'sqlite-jdbc-3.7.2.jar'),
-  # More .jars...
-#]
-
+    ]
 
 
 MIDDLEWARE_CLASSES = [
@@ -87,14 +79,13 @@ WSGI_APPLICATION = 'NZGoalDtree.wsgi.application'
 
 DATABASES = {
     'default': {
-        # SQLITE
+        ### SQLITE
         #'ENGINE': 'doj.db.backends.sqlite', #for jython deployment      
         #'ENGINE': 'django.db.backends.sqlite3',# for development
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         
-        #POSTGRES
+        ####POSTGRES
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # for development
-        #'ENGINE': 'doj.db.backends.postgresql', #for jython deployment
         'NAME': 'nzgoal_dtree',
         'USER': '',
         'PASSWORD': '',
@@ -136,37 +127,4 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
 STATIC_URL = '/static/'
-
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-#     #'/var/www/static/',
-# ]
-# STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
