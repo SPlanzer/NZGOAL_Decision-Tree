@@ -31,7 +31,11 @@
                                 </td>
                                 <td>
                                 	{% if dataSet.ldsId %}
+                                		{% if ',' in dataSet.ldsId  %}
+                                		<a href="{% url 'addldsid' dataSet.id %}" style="background-color:#FFFFFF;color:#000000;text-decoration:none">multiple</a>                               		
+                                		{% else %}
                                 		<a href="{% url 'addldsid' dataSet.id %}" style="background-color:#FFFFFF;color:#000000;text-decoration:none">{{ dataSet.ldsId }}</a>
+                                		{% endif %}
                                 	{% else %}
                                     	<a href="{% url 'addldsid' dataSet.id %}" class="btn btn-inverse btn-xs">
                                             <span class="glyphicon glyphicon-plus"></span>&nbsp;

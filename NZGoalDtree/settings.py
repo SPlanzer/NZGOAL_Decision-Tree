@@ -87,8 +87,8 @@ DATABASES = {
         ####POSTGRES
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # for development
         'NAME': 'nzgoal_dtree',
-        'USER': '',
-        'PASSWORD': '',
+        'USER': "djangotest-u",
+        'PASSWORD': 'password1',
         'HOST': 'devassgeo01',
         'PORT': '5432',
     }

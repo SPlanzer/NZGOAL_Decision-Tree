@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('dataSetName', models.CharField(max_length=200)),
                 ('dmName', models.CharField(max_length=200)),
                 ('treeComplete', models.BooleanField(default=False)),
-                ('ldsId', models.CharField(max_length=10, null=True, blank=True)),
+                ('ldsId', models.CharField(max_length=500, null=True, blank=True)),
             ],
         ),
         migrations.CreateModel(
