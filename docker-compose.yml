@@ -1,13 +1,31 @@
- version: '2'
- services:
-   db:
-     image: imiell/sqlite
-   web:
-     build: .
-     command: python manage.py runserver .0.0.0:8000
-     volumes:
-       - /webapp:/code
-     ports:
-       - "8000:8888"
-     depends_on:
-       - db
+version: '2'  
+services:  
+  nginx:
+    image: nginx:latest
+    container_name: nx01
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - /static:/static
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: dj01
+    command: bash -c 'sleep 10 && python manage.py makemigrations && python manage.py migrate && python manage.py loaddata database.json && gunicorn --config=gunicorn_config.py NZGoalDtree.wsgi'
+    depends_on:
+      - db
+    volumes:
+      - ./src:/src
+      - /static:/static
+    expose:
+      - "8000"
+
+  db:
+    image: postgres:latest
+    container_name: pg01
+
+
+

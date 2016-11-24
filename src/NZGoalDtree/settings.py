@@ -67,7 +67,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        },
+        },        ### SQLITE
+        #'ENGINE': 'doj.db.backends.sqlite', #for jython deployment      
+        #'ENGINE': 'django.db.backends.sqlite3',# for development
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        
     },
 ]
 
@@ -79,17 +83,11 @@ WSGI_APPLICATION = 'NZGoalDtree.wsgi.application'
 
 DATABASES = {
     'default': {
-        ### SQLITE
-        #'ENGINE': 'doj.db.backends.sqlite', #for jython deployment      
-        #'ENGINE': 'django.db.backends.sqlite3',# for development
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        
         ####POSTGRES
         'ENGINE': 'django.db.backends.postgresql_psycopg2', # for development
-        'NAME': 'nzgoal_dtree',
-        'USER': "djangotest-u",
-        'PASSWORD': 'password1',
-        'HOST': 'devassgeo01',
+        'NAME': 'postgres',
+        'USER': "postgres",
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
