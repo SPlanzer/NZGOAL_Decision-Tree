@@ -7,7 +7,8 @@ from . import views
 app_name = 'dtree'
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^login_user/$', views.loginUser, name='loginUser'), 
+    url(r'^logout_user/$', views.logoutUser, name='logoutUser'),
     url(r'^about/$', views.about, name = 'about'),
     url(r'datasets/$|^$', views.datasets, name = 'datasets'),
     url(r'^(?P<dataSet_id>[0-9]+)/$', views.detail, name = 'detail'),

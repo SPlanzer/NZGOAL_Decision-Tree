@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 
 
 from .models import DataSet
@@ -24,5 +25,12 @@ class AuditForm(forms.Form):
     date_to = forms.DateField(label='Date to (dd/mm/yy)', input_formats=['%d/%m/%y'])
     email = forms.CharField(label='Email', max_length=100)
 
-
-
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        
+        
+        

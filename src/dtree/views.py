@@ -1,11 +1,13 @@
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
-from .models import Question, Answer, DataSet
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import authenticate, login, logout
 from django import forms
+from django.views.generic import View 
 
 import threading
 
-from .forms import DataSetForm, AddLdsIdForm, AuditForm
+from .models import Question, Answer, DataSet
+from .forms import DataSetForm, AddLdsIdForm, AuditForm, UserForm
 from .audit import auditLds
 
 
@@ -62,6 +64,31 @@ def createDataSet(request):
         "form": form,
     }
     return render(request, 'dtree/create_dataset.html', context)
+
+def logoutUser(request):
+    logout(request)
+    form = UserForm(request.POST or None)
+    context = {
+        "form": form,
+    }
+    return render(request, 'dtree/login.html', context)
+
+
+def loginUser(request): # RENAME TO MATCH CONVENTION
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                allDataSets = DataSet.objects.order_by('dataSetName').all() # <-- duplicated in views -- method?
+                return render(request, 'dtree/datasets.html', {'allDataSets':allDataSets}) 
+            else:
+                return render(request, 'dtree/login.html', {'error_message': 'Your account has been disabled'})
+        else:
+            return render(request, 'dtree/login.html', {'error_message': 'Invalid login'})
+    return render(request, 'dtree/login.html')
 
 # --------------------------
 # Functions to support views
