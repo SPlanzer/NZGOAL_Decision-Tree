@@ -14,7 +14,7 @@ services:
   web:
     build: .
     container_name: dj01
-    command: bash -c 'sleep 10 && python manage.py makemigrations && python manage.py migrate && python manage.py loaddata databaseQs.json && python manage.py collectstatic --noinput gunicorn --config=gunicorn_config.py NZGoalDtree.wsgi'
+    command: bash -c 'sleep 10 && python manage.py makemigrations && python manage.py migrate && python manage.py loaddata databaseQs.json && python manage.py collectstatic --noinput && gunicorn --config=gunicorn_config.py NZGoalDtree.wsgi'
     depends_on:
       - db
     volumes:

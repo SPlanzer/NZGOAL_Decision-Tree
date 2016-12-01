@@ -1,6 +1,8 @@
+
 body{
 	background: white url("images/background.png")
 	}:
+
 	
 .navbar{
 	border-radius:0;
@@ -60,3 +62,25 @@ body{
 .btn-inverse.active {
   color: rgba(255, 255, 255, 0.75);
 }
+
+/*
+If a blue nav bar is wanted
+
+.navbar-custom {
+    background-color:#67a9cf;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}
+
+*/
