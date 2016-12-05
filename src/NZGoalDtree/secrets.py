@@ -1,6 +1,6 @@
 
 def secretKey():
-    return 'jg8qk^u9*9@&j$=h6epxmlvxy#g2x_64kvy6smc!s$i&%l_3be'
+    return '<web sitekey>'
 
 def mailServer():
-    return '**********'
+    return '<linz mail server>'
